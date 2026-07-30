@@ -1,0 +1,50 @@
+import { Palette } from "std-widgets.slint";
+
+export component SidebarButton inherits Rectangle {
+    in property <image> icon;
+    in property <string> text;
+    in property <bool> is-selected: false;
+    callback clicked();
+
+    width: 56px;
+    height: self.width;
+    border-radius: 8px;
+
+    background: touch.has-hover 
+        ? touch.pressed 
+        ? Palette.selection-background : Palette.control-background : is-selected 
+        ? Palette.selection-background : transparent;
+
+    VerticalLayout {
+        alignment: center;
+        horizontal-stretch: 1;
+        spacing: 4px;
+        height: parent.height;
+        width: parent.width;
+
+        VerticalLayout {
+            padding-left: 16px;
+            
+            Image {
+                source: icon;
+                width: 22px;
+                height: 22px;
+                colorize: Palette.foreground;
+                horizontal-alignment: center;
+            }
+        }
+
+        Text {
+            text: root.text;
+            color: Palette.foreground;
+            horizontal-alignment: center;
+            font-size: 11px;
+        }
+    }
+
+    touch := TouchArea {
+        clicked => {
+            root.clicked();
+        }
+    }
+}

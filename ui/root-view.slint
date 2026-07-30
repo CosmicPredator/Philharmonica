@@ -1,0 +1,54 @@
+import { Palette, VerticalBox, Button } from "std-widgets.slint";
+import { SidebarButton } from "components/sidebar-button.slint";
+
+
+export component RootView inherits Rectangle {
+    in-out property <int> selected-index: 0;
+
+    HorizontalLayout {
+        width: parent.width;
+        height: parent.height;
+        
+        Rectangle {
+            width: 70px;
+            background: Palette.control-background;
+
+            VerticalBox {
+                alignment: start;
+                spacing: 15px;
+                
+                SidebarButton {
+                    icon: @image-url("../assets/icons/house.svg");
+                    text: "Home";
+                    is-selected: selected-index == 0;
+                    clicked => {
+                        selected-index = 0;
+                    }
+                }
+
+                SidebarButton {
+                    icon: @image-url("../assets/icons/compass.svg");
+                    text: "Explore";
+                    is-selected: selected-index == 1;
+                    clicked => {
+                        selected-index = 1;
+                    }
+                }
+
+                SidebarButton {
+                    icon: @image-url("../assets/icons/bookmark.svg");
+                    text: "Library";
+                    is-selected: selected-index == 2;
+                    clicked => {
+                        selected-index = 2;
+                    }
+                }
+            }
+        }
+
+        Rectangle {
+            background: Palette.background; 
+        }
+    }
+}
+
