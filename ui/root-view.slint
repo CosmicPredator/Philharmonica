@@ -12,18 +12,12 @@ export component RootView inherits Rectangle {
     ];
 
     HorizontalLayout {
-        width: parent.width;
-        height: parent.height;
-
         Rectangle {
             width: 70px;
             background: Palette.control-background;
-            height: parent.height;
 
             VerticalBox {
                 spacing: 10px;
-                width: parent.width;
-                height: parent.height;
 
                 for data[index] in root.menu-items: SidebarButton {
                     icon: data.icon;
