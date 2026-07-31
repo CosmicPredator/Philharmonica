@@ -1,54 +1,54 @@
 import { Palette, VerticalBox, Button } from "std-widgets.slint";
 import { SidebarButton } from "components/sidebar-button.slint";
 
+struct MenuItems { name: string, icon: image}
 
 export component RootView inherits Rectangle {
     in-out property <int> selected-index: 0;
+    in property <[MenuItems]> menu-items: [
+        { name: "Home", icon: @image-url("../assets/icons/house.svg") },
+        { name: "Explore", icon: @image-url("../assets/icons/compass.svg") },
+        { name: "Library", icon: @image-url("../assets/icons/bookmark.svg") },
+    ];
 
     HorizontalLayout {
         width: parent.width;
         height: parent.height;
-        
+
         Rectangle {
             width: 70px;
             background: Palette.control-background;
+            height: parent.height;
 
             VerticalBox {
-                alignment: start;
-                spacing: 15px;
-                
-                SidebarButton {
-                    icon: @image-url("../assets/icons/house.svg");
-                    text: "Home";
-                    is-selected: selected-index == 0;
+                spacing: 10px;
+                width: parent.width;
+                height: parent.height;
+
+                for data[index] in root.menu-items: SidebarButton {
+                    icon: data.icon;
+                    text: data.name;
+                    is-selected: selected-index == index;
                     clicked => {
-                        selected-index = 0;
+                        selected-index = index;
                     }
                 }
 
-                SidebarButton {
-                    icon: @image-url("../assets/icons/compass.svg");
-                    text: "Explore";
-                    is-selected: selected-index == 1;
-                    clicked => {
-                        selected-index = 1;
-                    }
-                }
+                Rectangle { vertical-stretch: 1; }
 
                 SidebarButton {
-                    icon: @image-url("../assets/icons/bookmark.svg");
-                    text: "Library";
-                    is-selected: selected-index == 2;
+                    icon: @image-url("../assets/icons/settings.svg");
+                    text: "Settings";
+                    is-selected: selected-index == 3;
                     clicked => {
-                        selected-index = 2;
+                        selected-index = 3;
                     }
                 }
             }
         }
 
         Rectangle {
-            background: Palette.background; 
+            background: Palette.background;
         }
     }
 }
-
