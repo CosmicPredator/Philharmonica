@@ -1,14 +1,17 @@
-import { Palette, VerticalBox, Button } from "std-widgets.slint";
+import { Palette, VerticalBox, Button, AboutSlint } from "std-widgets.slint";
 import { SidebarButton } from "components/sidebar-button.slint";
+import { AlbumView } from "album-page.slint";
 
 struct MenuItems { name: string, icon: image}
 
 export component RootView inherits Rectangle {
     in-out property <int> selected-index: 0;
     in property <[MenuItems]> menu-items: [
+        { name: "Back", icon: @image-url("../assets/icons/arrow-left.svg") },
         { name: "Home", icon: @image-url("../assets/icons/house.svg") },
         { name: "Explore", icon: @image-url("../assets/icons/compass.svg") },
         { name: "Library", icon: @image-url("../assets/icons/bookmark.svg") },
+        { name: "Search", icon: @image-url("../assets/icons/search.svg") }
     ];
 
     HorizontalLayout {
@@ -33,16 +36,14 @@ export component RootView inherits Rectangle {
                 SidebarButton {
                     icon: @image-url("../assets/icons/settings.svg");
                     text: "Settings";
-                    is-selected: selected-index == 3;
+                    is-selected: selected-index == menu-items.length + 1;
                     clicked => {
-                        selected-index = 3;
+                        selected-index = menu-items.length + 1;
                     }
                 }
             }
         }
 
-        Rectangle {
-            background: Palette.background;
-        }
+        AlbumView {}
     }
 }
