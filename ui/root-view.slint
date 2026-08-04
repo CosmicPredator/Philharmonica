@@ -1,6 +1,7 @@
 import { Palette, VerticalBox, Button, AboutSlint } from "std-widgets.slint";
 import { SidebarButton } from "components/sidebar-button.slint";
 import { AlbumView } from "album-page.slint";
+import { Player } from "components/player.slint";
 
 struct MenuItems { name: string, icon: image}
 
@@ -44,6 +45,13 @@ export component RootView inherits Rectangle {
             }
         }
 
-        AlbumView {}
+        AlbumView { 
+        }
+    }
+
+    Player {
+        width: parent.width - 70px;
+        z: 1;
+        y: parent.height - 100px;
     }
 }

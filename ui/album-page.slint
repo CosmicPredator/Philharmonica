@@ -3,6 +3,7 @@ import {
     VerticalBox,
     Button,
     StandardListView,
+    ScrollView,
 } from "std-widgets.slint";
 
 struct Song {
@@ -18,6 +19,7 @@ component SongRow inherits Rectangle {
     callback play();
 
     //height: 60px;
+    border-radius: 4px;
     background: touch-area.has-hover ? Palette.control-background : transparent;
 
     touch-area := TouchArea {
@@ -26,14 +28,24 @@ component SongRow inherits Rectangle {
 
     HorizontalLayout {
         spacing: 20px;
-        padding-right: 60px;
-        
-        Text {
-            text: ix;
-            vertical-alignment: center;
-            font-weight: 600;
-            opacity: 0.6;
-            font-size: 17px;
+        padding-left: 15px;
+        padding-right: 15px;
+
+        Rectangle {
+            Text {
+                text: ix;
+                vertical-alignment: center;
+                font-weight: 600;
+                opacity: 0.6;
+                font-size: 17px;
+                visible: !touch-area.has-hover;
+            }
+
+            Image {
+                source: @image-url("../assets/icons/play.svg");
+                colorize: Palette.foreground;
+                visible: touch-area.has-hover;
+            }
         }
 
         VerticalLayout {
@@ -65,11 +77,13 @@ component SongRow inherits Rectangle {
             Image {
                 source: @image-url("../assets/icons/thumbs-up.svg");
                 colorize: Palette.foreground;
+                visible: touch-area.has-hover;
             }
 
             Image {
                 source: @image-url("../assets/icons/thumbs-down.svg");
                 colorize: Palette.foreground;
+                visible: touch-area.has-hover;
             }
 
             Image {
@@ -80,109 +94,162 @@ component SongRow inherits Rectangle {
     }
 }
 
-export component AlbumView inherits VerticalLayout {
-    width: 100%;
-    height: 100%;
-    alignment: start;
-    padding-left: 40px;
-    padding-right: 40px;
-    padding-top: 40px;
-    vertical-stretch: 1;
-
+export component AlbumView inherits ScrollView {
     in property <[Song]> songs: [
         { title: "五等分の気持ち - Gotoubun no Kimochi", plays: "11M plays" },
         { title: "ごぶんのいち - Gobun no Ichi", plays: "3M plays" },
-        { title: "五等分の気持ち (TV EDIT) - Gotoubun no Kimochi (TV Edit)", plays: "11M plays" },
-        { title: "五等分の気持ち (インストゥルメンタル) - Gotoubun no Kimochi (Instrumental)", plays: "83K plays" },
-        { title: "ごぶんのいち (インストゥルメンタル) - Gobun no Ichi (Instrumental)", plays: "28K plays" },
+        {
+            title: "五等分の気持ち (TV EDIT) - Gotoubun no Kimochi (TV Edit)",
+            plays: "11M plays"
+        },
+        {
+            title: "五等分の気持ち (インストゥルメンタル) - Gotoubun no Kimochi (Instrumental)",
+            plays: "83K plays"
+        },
+        {
+            title: "ごぶんのいち (インストゥルメンタル) - Gobun no Ichi (Instrumental)",
+            plays: "28K plays"
+        },
+        { title: "五等分の気持ち - Gotoubun no Kimochi", plays: "11M plays" },
+        { title: "ごぶんのいち - Gobun no Ichi", plays: "3M plays" },
+        {
+            title: "五等分の気持ち (TV EDIT) - Gotoubun no Kimochi (TV Edit)",
+            plays: "11M plays"
+        },
+        {
+            title: "五等分の気持ち (インストゥルメンタル) - Gotoubun no Kimochi (Instrumental)",
+            plays: "83K plays"
+        },
+        {
+            title: "ごぶんのいち (インストゥルメンタル) - Gobun no Ichi (Instrumental)",
+            plays: "28K plays"
+        },
+        { title: "五等分の気持ち - Gotoubun no Kimochi", plays: "11M plays" },
+        { title: "ごぶんのいち - Gobun no Ichi", plays: "3M plays" },
+        {
+            title: "五等分の気持ち (TV EDIT) - Gotoubun no Kimochi (TV Edit)",
+            plays: "11M plays"
+        },
+        {
+            title: "五等分の気持ち (インストゥルメンタル) - Gotoubun no Kimochi (Instrumental)",
+            plays: "83K plays"
+        },
+        {
+            title: "ごぶんのいち (インストゥルメンタル) - Gobun no Ichi (Instrumental)",
+            plays: "28K plays"
+        },
+        { title: "五等分の気持ち - Gotoubun no Kimochi", plays: "11M plays" },
+        { title: "ごぶんのいち - Gobun no Ichi", plays: "3M plays" },
+        {
+            title: "五等分の気持ち (TV EDIT) - Gotoubun no Kimochi (TV Edit)",
+            plays: "11M plays"
+        },
+        {
+            title: "五等分の気持ち (インストゥルメンタル) - Gotoubun no Kimochi (Instrumental)",
+            plays: "83K plays"
+        },
+        {
+            title: "ごぶんのいち (インストゥルメンタル) - Gobun no Ichi (Instrumental)",
+            plays: "28K plays"
+        },
     ];
 
-    HorizontalLayout {
-        spacing: 20px;
+    VerticalLayout {
+        alignment: start;
+        padding-left: 40px;
+        padding-right: 40px;
+        padding-top: 40px;
+        padding-bottom: 100px;
+        vertical-stretch: 1;
 
-        Image {
-            source: @image-url("../assets/cover_1.jpg");
-            preferred-width: 250px;
-            preferred-height: 250px;
-            horizontal-alignment: ImageHorizontalAlignment.left;
+        HorizontalLayout {
+            padding-left: 20px; 
+            spacing: 20px;
+
+            Image {
+                source: @image-url("../assets/cover_1.jpg");
+                width: 250px;
+                height: 250px;
+                horizontal-alignment: ImageHorizontalAlignment.left;
+            }
+
+            VerticalLayout {
+                horizontal-stretch: 1;
+                alignment: start;
+                spacing: 5px;
+                Text {
+                    text: "Gotoubun no Kimochi";
+                    font-weight: 600;
+                    font-size: 35px;
+                    horizontal-alignment: start;
+                }
+
+                Text {
+                    text: "Nakanoke no Itsutsugo";
+                    font-weight: 400;
+                    font-size: 20px;
+                    horizontal-alignment: start;
+                }
+
+                Text {
+                    text: "EP • 2019";
+                    font-weight: 300;
+                    font-size: 15px;
+                    horizontal-alignment: start;
+                }
+
+                Text {
+                    text: "5 songs • 18 minutes";
+                    font-weight: 300;
+                    font-size: 15px;
+                    horizontal-alignment: start;
+                }
+
+                Rectangle {
+                    height: 20px;
+                }
+
+                HorizontalLayout {
+                    alignment: start;
+                    spacing: 10px;
+
+                    Button {
+                        text: "Play";
+                        icon: @image-url("../assets/icons/play.svg");
+                        colorize-icon: true;
+                        primary: true;
+                    }
+
+                    Button {
+                        text: "Save";
+                        icon: @image-url("../assets/icons/bookmark.svg");
+                        colorize-icon: true;
+                    }
+
+                    Button {
+                        text: "Share";
+                        icon: @image-url("../assets/icons/share.svg");
+                        colorize-icon: true;
+                    }
+
+                    Button {
+                        icon: @image-url("../assets/icons/ellipsis-vertical.svg");
+                        colorize-icon: true;
+                    }
+                }
+            }
+        }
+
+        Rectangle {
+            height: 40px;
         }
 
         VerticalLayout {
-            horizontal-stretch: 1;
-            alignment: start;
-            spacing: 5px;
-            Text {
-                text: "Gotoubun no Kimochi";
-                font-weight: 600;
-                font-size: 35px;
-                horizontal-alignment: start;
+            spacing: 10px;
+            for song[index] in root.songs: SongRow {
+                song: song;
+                ix: index + 1;
             }
-
-            Text {
-                text: "Nakanoke no Itsutsugo";
-                font-weight: 400;
-                font-size: 20px;
-                horizontal-alignment: start;
-            }
-
-            Text {
-                text: "EP • 2019";
-                font-weight: 300;
-                font-size: 15px;
-                horizontal-alignment: start;
-            }
-
-            Text {
-                text: "5 songs • 18 minutes";
-                font-weight: 300;
-                font-size: 15px;
-                horizontal-alignment: start;
-            }
-
-            Rectangle {
-                height: 20px;
-            }
-
-            HorizontalLayout {
-                alignment: start;
-                spacing: 10px;
-
-                Button {
-                    text: "Play";
-                    icon: @image-url("../assets/icons/play.svg");
-                    colorize-icon: true;
-                    primary: true;
-                }
-
-                Button {
-                    text: "Save";
-                    icon: @image-url("../assets/icons/bookmark.svg");
-                    colorize-icon: true;
-                }
-
-                Button {
-                    text: "Share";
-                    icon: @image-url("../assets/icons/share.svg");
-                    colorize-icon: true;
-                }
-
-                Button {
-                    icon: @image-url("../assets/icons/ellipsis-vertical.svg");
-                    colorize-icon: true;
-                }
-            }
-        }
-    }
-
-    Rectangle {
-        height: 40px;
-    }
-
-    VerticalLayout {
-        spacing: 10px; 
-        for song[index] in root.songs: SongRow {
-            song: song;
-            ix: index + 1;
         }
     }
 }

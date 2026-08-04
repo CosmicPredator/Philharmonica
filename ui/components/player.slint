@@ -1,0 +1,166 @@
+import { Palette, Button, VerticalBox, Slider } from "std-widgets.slint";
+
+component PlayerButton inherits Rectangle {
+    in property <image> icon;
+    in property <length> size;
+
+    background: play-ta.has-hover ? Palette.control-background : transparent;
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+
+    animate background { duration: 150ms; }
+
+    Image {
+        source: icon;
+        width: size;
+        height: size;
+        colorize: Palette.control-foreground;
+    }
+
+    play-ta := TouchArea {
+        mouse-cursor: MouseCursor.pointer;
+    }
+}
+
+export component PlayerButtons inherits VerticalLayout {
+    VerticalLayout {
+        alignment: center;
+        spacing: 10px;
+
+        HorizontalLayout {
+            alignment: center;
+            spacing: 5px;
+
+            Text {
+                text: "00:30";
+            }
+
+            Slider {
+                width: 400px;
+                value: 20;
+            }
+
+            Text {
+                text: "04:24";
+            }
+        }
+
+        HorizontalLayout {
+            alignment: center;
+
+            PlayerButton {
+                icon: @image-url("../../assets/icons/repeat.svg");
+                size: 20px;
+            }
+
+            Rectangle {
+                width: 20px;
+            }
+
+            PlayerButton {
+                icon: @image-url("../../assets/icons/skip-back.svg");
+                size: 20px;
+            }
+
+            PlayerButton {
+                icon: @image-url("../../assets/icons/play.svg");
+                size: 30px;
+            }
+
+            PlayerButton {
+                icon: @image-url("../../assets/icons/skip-forward.svg");
+                size: 20px;
+            }
+
+            Rectangle {
+                width: 20px;
+            }
+
+            PlayerButton {
+                icon: @image-url("../../assets/icons/shuffle.svg");
+                size: 20px;
+            }
+        }
+    }
+}
+
+export component Player inherits Rectangle {
+    height: 100px;
+    x: 70px;
+    background: Palette.alternate-background;
+    clip: true;
+
+    HorizontalLayout {
+        HorizontalLayout {
+            horizontal-stretch: 0;
+            padding: 10px;
+            spacing: 10px;
+            width: 320px;
+
+            Image {
+                source: @image-url("../../assets/cover_1.jpg");
+                image-fit: fill;
+                width: 80px;
+            }
+
+            VerticalLayout {
+                alignment: center;
+                spacing: 3px;
+
+                Text {
+                    text: "五等分の気持ち - Gotoubun no Kimochi";
+                    font-size: 15px;
+                    font-weight: 600;
+                    overflow: elide;
+                }
+                Text {
+                    text: "Nakanoke no Itsutsugo";
+                    font-weight: 300;
+                    opacity: 0.7;
+                    font-italic: true;
+                    overflow: elide;
+                }
+                Text {
+                    text: "Gotoubun no Kimochi";
+                    font-weight: 400;
+                    overflow: elide;
+                }
+            }
+        }
+
+        HorizontalLayout {
+            horizontal-stretch: 1;
+            alignment: center;
+
+            PlayerButtons { }
+        }
+
+        HorizontalLayout {
+            horizontal-stretch: 0;
+            alignment: center;
+            spacing: 10px;
+            padding-right: 10px;
+            y: 25px;
+
+            Button {
+                icon: @image-url("../../assets/icons/thumbs-down.svg");
+                colorize-icon: true;
+                width: 50px;
+                height: 50px;
+            }
+            Button {
+                icon: @image-url("../../assets/icons/thumbs-up.svg");
+                colorize-icon: true;
+                width: 50px;
+                height: 50px;
+            }
+            Button {
+                icon: @image-url("../../assets/icons/ellipsis-vertical.svg");
+                colorize-icon: true;
+                width: 50px;
+                height: 50px;
+            }
+        }
+    }
+}
