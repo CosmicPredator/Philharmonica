@@ -55,7 +55,7 @@ component SongRow inherits Rectangle {
 
             Text {
                 text: song.title;
-                font-weight: 600;
+                font-weight: 400;
                 font-size: 16px;
                 horizontal-alignment: left;
             }
@@ -166,11 +166,18 @@ export component AlbumView inherits ScrollView {
             padding-left: 20px; 
             spacing: 20px;
 
-            Image {
-                source: @image-url("../assets/cover_1.jpg");
+            Rectangle {
                 width: 250px;
                 height: 250px;
-                horizontal-alignment: ImageHorizontalAlignment.left;
+                border-radius: 8px;
+                clip: true;
+                
+                Image {
+                    source: @image-url("../assets/cover_1.jpg");
+                    width: 250px;
+                    height: 250px;
+                    horizontal-alignment: ImageHorizontalAlignment.left;
+                }
             }
 
             VerticalLayout {

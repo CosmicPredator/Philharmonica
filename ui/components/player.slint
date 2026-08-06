@@ -5,8 +5,8 @@ component PlayerButton inherits Rectangle {
     in property <length> size;
 
     background: play-ta.has-hover ? Palette.control-background : transparent;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     border-radius: 8px;
 
     animate background { duration: 150ms; }
@@ -26,7 +26,6 @@ component PlayerButton inherits Rectangle {
 export component PlayerButtons inherits VerticalLayout {
     VerticalLayout {
         alignment: center;
-        spacing: 10px;
 
         HorizontalLayout {
             alignment: center;
@@ -51,80 +50,86 @@ export component PlayerButtons inherits VerticalLayout {
 
             PlayerButton {
                 icon: @image-url("../../assets/icons/repeat.svg");
-                size: 20px;
+                size: 15px;
             }
 
             Rectangle {
-                width: 20px;
+                width: 10px;
             }
 
             PlayerButton {
                 icon: @image-url("../../assets/icons/skip-back.svg");
-                size: 20px;
+                size: 15px;
             }
 
             PlayerButton {
                 icon: @image-url("../../assets/icons/play.svg");
-                size: 30px;
+                size: 25px;
             }
 
             PlayerButton {
                 icon: @image-url("../../assets/icons/skip-forward.svg");
-                size: 20px;
+                size: 15px;
             }
 
             Rectangle {
-                width: 20px;
+                width: 10px;
             }
 
             PlayerButton {
                 icon: @image-url("../../assets/icons/shuffle.svg");
-                size: 20px;
+                size: 15px;
             }
         }
     }
 }
 
 export component Player inherits Rectangle {
-    height: 100px;
-    x: 70px;
+    height: 70px;
     background: Palette.alternate-background;
-    clip: true;
 
     HorizontalLayout {
         HorizontalLayout {
             horizontal-stretch: 0;
             padding: 10px;
             spacing: 10px;
-            width: 320px;
 
-            Image {
-                source: @image-url("../../assets/cover_1.jpg");
-                image-fit: fill;
-                width: 80px;
+            Rectangle {
+                width: 50px;
+                height: self.width;
+                border-radius: 4px;
+                clip: true;
+                
+                Image {
+                    source: @image-url("../../assets/cover_1.jpg");
+                    image-fit: fill;
+                    width: 50px;
+                }
             }
 
             VerticalLayout {
                 alignment: center;
-                spacing: 3px;
+                spacing: 1px;
 
                 Text {
                     text: "五等分の気持ち - Gotoubun no Kimochi";
-                    font-size: 15px;
+                    font-size: 12px;
                     font-weight: 600;
                     overflow: elide;
                 }
                 Text {
                     text: "Nakanoke no Itsutsugo";
-                    font-weight: 300;
-                    opacity: 0.7;
+                    font-weight: 400;
+                    opacity: 0.8;
                     font-italic: true;
                     overflow: elide;
+                    font-size: 10px;
                 }
                 Text {
                     text: "Gotoubun no Kimochi";
                     font-weight: 400;
                     overflow: elide;
+                    font-size: 10px;
                 }
             }
         }
@@ -141,25 +146,25 @@ export component Player inherits Rectangle {
             alignment: center;
             spacing: 10px;
             padding-right: 10px;
-            y: 25px;
+            y: 15px;
 
             Button {
                 icon: @image-url("../../assets/icons/thumbs-down.svg");
                 colorize-icon: true;
-                width: 50px;
-                height: 50px;
+                width: 40px;
+                height: 40px;
             }
             Button {
                 icon: @image-url("../../assets/icons/thumbs-up.svg");
                 colorize-icon: true;
-                width: 50px;
-                height: 50px;
+                width: 40px;
+                height: 40px;
             }
             Button {
                 icon: @image-url("../../assets/icons/ellipsis-vertical.svg");
                 colorize-icon: true;
-                width: 50px;
-                height: 50px;
+                width: 40px;
+                height: 40px;
             }
         }
     }
